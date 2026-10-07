@@ -3,23 +3,35 @@ public class Main {
         Book book1 = new Book("Первая книга", 1800, "Первый автор", 4);
         Book book2 = new Book("Вторая книга", 2000, "Второй автор", 600);
 
-        System.out.println("1");
-        System.out.println("Название книги: " + book1.title +
-                ", Год выпуска: " + book1.releaseYear +
-                ", Автор: " + book1.author +
-                ", Количество страниц: " + book1.pages +
-                ", Книга большая? " + book1.isBig() +
-                ", Содержит описание? " + book1.matches("Первая") +
-                ", Стоимость: " + book1.estimatePrice() + " руб."
-        );
-        System.out.println("2");
-        System.out.println("Название книги: " + book2.title +
-                ", Год выпуска: " + book2.releaseYear +
-                ", Автор: " + book2.author +
-                ", Количество страниц: " + book2.pages +
-                ", Книга большая? " + book2.isBig() +
-                ", Содержит описание? " + book2.matches("Первая") +
-                ", Стоимость: " + book2.estimatePrice() + " руб."
-        );
+        Book[] books = {book1, book2};
+
+        System.out.println("Все книги");
+        printBookInfo(1, book1);
+        printBookInfo(2, book2);
+
+        String searchWord = "Вторая";
+        System.out.println("\nПоиск книг по слову \"" + searchWord + "\"");
+
+        boolean found = false;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].matches(searchWord).equals("Да")) {
+                printBookInfo(i + 1, books[i]);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Книга \"" + searchWord + "\" не найдена.");
+        }
+    }
+
+    private static void printBookInfo(int number, Book book) {
+        System.out.println(number +
+                ". Название: " + book.title +
+                ", Год: " + book.releaseYear +
+                ", Автор: " + book.author +
+                ", Страниц: " + book.pages +
+                ", Большая? " + book.isBig() +
+                ", Стоимость: " + book.estimatePrice() + " руб.");
     }
 }
